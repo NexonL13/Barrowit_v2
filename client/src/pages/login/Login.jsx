@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import {Formik, Form} from 'formik'
 import { Link, useNavigate } from 'react-router-dom'
 import FormikControl from '../forms/formik/FormikControl'
@@ -96,7 +96,8 @@ const Login = () => {
          validateOnChange={false}
         >
         <Form className="mt-8 grid grid-cols-6 gap-6">
-        <div className="col-span-6 sm:col-span-6" style={{display: !incorrect && 'none'}}>
+        <div className={`${
+          incorrect ? "visible" : "hidden"} col-span-6 sm:col-span-6`}>
         <WarningError warningTitle="Incorrect Account" warningText="Incorrect Account Credential"/>
         </div>
           <div className="col-span-6">
@@ -126,7 +127,7 @@ const Login = () => {
             </button>
 
             <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-              Doesn't have an account?
+              Doesn&apos;t have an account?
               <Link to="/login" className="text-gray-700 underline ps-1">Register</Link>.
             </p>
           </div>

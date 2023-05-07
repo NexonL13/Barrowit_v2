@@ -9,9 +9,10 @@ app.use(express.json())
 app.use(cors())
 
 
-
 const adminRouter = require('./routes/admin')
+const assetRouter = require('./routes/asset')
 app.use('/auth', adminRouter)
+app.use('/asset', assetRouter)
 
 db.sequelize.sync().then(()=> {
     app.listen(port, () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import {Formik, Form} from 'formik'
 import { Link, useNavigate } from 'react-router-dom'
 import FormikControl from '../forms/formik/FormikControl'
@@ -35,7 +35,7 @@ const Register = () => {
     email: Yup.string().email('Must be a valid email').required('Email is a required field'),
     password: Yup.string().min(6, 'Must be at least 6 characters').max(20, 'Must be at most 20 characters').required('Password is a required field'),
     confirm_password: Yup.mixed().oneOf([Yup.ref('password'), null], 'Must match a password').required('Confirm password is a required field'),
-    position: Yup.string().required("Select is a required field").notOneOf([""], "Select a valid option")
+    position: Yup.string().required("Position is a required field").notOneOf([""], "Select a valid position")
   })
   const onSubmit = async (values) => {
     await axios.post("http://localhost:3000/auth/register", values).then((res)=> {
@@ -116,7 +116,8 @@ const Register = () => {
          validateOnChange={false}
         >
         <Form className="mt-8 grid grid-cols-6 gap-6">
-        <div className="col-span-6 sm:col-span-6" style={{display: !exist && 'none'}}>
+        <div className={`${
+          exist ? "visible" : "hidden"} col-span-6 sm:col-span-6`}>
         <WarningError warningTitle="Account Already Exist" warningText="This account is already used."/>
         </div>
           <div className="col-span-6 sm:col-span-2">
