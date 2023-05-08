@@ -2,9 +2,15 @@ const { Asset } = require('../models')
 const multer = require('multer')
 const path = require('path')
 
-const getAsset = async (req,res) => {
+const getAssets = async (req,res) => {
     const listOfAsset = await Asset.findAll()
     res.json(listOfAsset)
+}
+
+const getSingleAsset = async (req,res) => {
+    const assetId = req.params.assetId
+    const asset = await Asset.findOne({where: {id: assetId}})
+    res.json(asset)
 }
 
 const addAsset = async (req,res) => {
@@ -25,6 +31,30 @@ const addAsset = async (req,res) => {
         res.json(asset)
     }
       
+}
+
+const updateAsset = async (req,res) => {
+    const assetId = req.params.assetId
+    if(req.file){
+    const asset = {
+            image: req.file.filename,
+            name: req.body.name,
+            description: req.body.description,
+            stock: req.body.stock,
+            category: req.body.category,
+            sponsor: req.body.sponsor
+        }
+    
+        await Asset.update(asset, {
+            where: {
+                id: assetId,
+            }
+        })
+        res.json(asset)
+    }else {
+        res.json({error: 'No file uploaded'})
+    }
+    
 }
 
 const deleteAsset = (req,res) => {
@@ -63,8 +93,10 @@ const upload = multer({
 })
 
 module.exports = {
-    getAsset,
+    getAssets,
+    getSingleAsset,
     addAsset,
+    updateAsset,
     deleteAsset,
     upload
 }
