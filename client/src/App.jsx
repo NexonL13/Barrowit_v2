@@ -1,21 +1,29 @@
-import './App.css'
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Register from './pages/register/Register'
-import UpdateAsset from './pages/dashboard/pages/UpdateAsset'
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Register from "./pages/register/Register";
+import Login from "./pages/login/Login";
+import TableAsset from "./pages/dashboard/pages/TableAsset";
+import UpdateAsset from "./pages/dashboard/pages/UpdateAsset";
+import AddAsset from "./pages/dashboard/pages/AddAsset";
+import Dashboard from "./pages/dashboard/Dashboard";
 
 
 function App() {
-
   return (
     <>
-    <BrowserRouter>
-    <Routes>
-      <Route path='/asset/:id' element={<UpdateAsset/>}/>
-      <Route index element={<Register/>}/>
-    </Routes>
-    </BrowserRouter>  
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Login/>} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route path="assets" element={<TableAsset />}/>
+            <Route path="add" element={<AddAsset />} />
+            <Route path="update/:id" element={<UpdateAsset />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

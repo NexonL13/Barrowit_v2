@@ -35,7 +35,6 @@ const addAsset = async (req,res) => {
 
 const updateAsset = async (req,res) => {
     const assetId = req.params.assetId
-    if(req.file){
     const asset = {
             image: req.file.filename,
             name: req.body.name,
@@ -51,9 +50,6 @@ const updateAsset = async (req,res) => {
             }
         })
         res.json(asset)
-    }else {
-        res.json({error: 'No file uploaded'})
-    }
     
 }
 
