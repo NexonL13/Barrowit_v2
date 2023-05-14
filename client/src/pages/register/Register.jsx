@@ -42,7 +42,7 @@ const Register = () => {
       if(res.data.error) {
         setExist(true)
       }else {
-      navigate('/login')
+      navigate('/')
       }
       
     })

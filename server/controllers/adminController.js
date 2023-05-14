@@ -1,7 +1,6 @@
 const { Admin } = require('../models')
 const bcrypt = require('bcrypt')
 
-
 const registerAdmin = async (req, res) => {
     const { firstName, middleName, lastName, email, password, position} = req.body
 
@@ -23,20 +22,36 @@ const registerAdmin = async (req, res) => {
     }
 }
 
-const loginAdmin = async (req,res) => {
-    const { email, password } = req.body
-
-    const emailAdmin = await Admin.findOne({where: {email: email}})
-
-    if(emailAdmin) {
-        bcrypt.compare(password, emailAdmin.password).then((match) => {
-            if(!match) return res.json({error:"Incorrect username and password"})
-
-            return res.json({success:"Login success"})
-        })
+const isLoggedIn = (req, res) => {
+    if(req.session.admin) {
+        return res.json({loggedIn: true, admin: req.session.admin})
     }else {
-        return res.json({error: "Email doesn't exist"})
+        return res.json({loggedIn: false})
     }
 }
 
-module.exports = { registerAdmin, loginAdmin }
+const loginAdmin = async (req,res) => {
+    const { email, password } = req.body
+
+    const admin = await Admin.findOne({where: {email: email}})
+
+    if(admin) {
+        bcrypt.compare(password, admin.password).then((match) => {
+            if(!match) return res.json({error:"Incorrect username and password"})
+            req.session.admin = admin
+            return res.json({loggedIn: true})
+        })
+    }else {
+        return res.json({loggedIn: false})
+    }
+}
+
+const logoutAdmin = (req, res) => {
+    if(req.session.admin && req.cookies.admin_id) {
+        res.clearCookie('admin_id') 
+        res.json({loggedIn: false})
+        return res.end()
+    }
+}
+
+module.exports = { registerAdmin, loginAdmin, isLoggedIn, logoutAdmin }

@@ -4,9 +4,29 @@ const db = require('./models')
 const cors = require('cors')
 const port = 3000
 
+const session = require('express-session')
+const cookieParser = require('cookie-parser')
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}))
+app.use(express.urlencoded({extended: true}))
+app.use(cookieParser())
+
+app.use(session({
+    key: 'admin_id',
+    secret: 'zeieist',
+	resave: false,
+    saveUninitialized: false,
+	cookie: {
+	    maxAge: 24 * 60 * 60 * 1000,
+	    secure: false,
+        httpOnly: true,
+        sameSite: 'strict'
+	}
+}))
 
 
 const adminRouter = require('./routes/admin')

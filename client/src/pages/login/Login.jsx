@@ -18,12 +18,14 @@ const Login = () => {
     email: Yup.string().email('Must be a valid email').required('Email is a required field'),
     password: Yup.string().min(6, 'Must be at least 6 characters').max(20, 'Must be at most 20 characters').required('Password is a required field')
   })
+
+  
   const onSubmit = async (values) => {
-    await axios.post("http://localhost:3000/auth/login", values).then((res)=> {
+     axios.post("http://localhost:3000/auth/login", values).then((res)=> {
       if(res.data.error) {
         setIncorrect(true)
       }else {
-        navigate('/')
+        navigate('/dashboard')
       }
     })
   };
@@ -128,7 +130,7 @@ const Login = () => {
 
             <p className="mt-4 text-sm text-gray-500 sm:mt-0">
               Doesn&apos;t have an account?
-              <Link to="/login" className="text-gray-700 underline ps-1">Register</Link>.
+              <Link to="/register" className="text-gray-700 underline ps-1">Register</Link>.
             </p>
           </div>
         </Form>

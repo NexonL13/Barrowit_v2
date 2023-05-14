@@ -6,7 +6,7 @@ const DeleteModal = ({id, name, description, setIsDelete}) => {
   const deleteAsset = async () => {
 
     await axios.delete(`http://localhost:3000/asset/${id}`).then(() =>{
-        setIsDelete(true)
+        setIsDelete(prev =>!prev)
     })
   }
 
