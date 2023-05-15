@@ -7,6 +7,8 @@ import UpdateAsset from "./pages/dashboard/components/UpdateAsset";
 import AddAsset from "./pages/dashboard/components/AddAsset";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Calendar from "./pages/dashboard/pages/Calendar";
+import Analytics from "./pages/dashboard/pages/Analytics";
+import Users from "./pages/dashboard/pages/Users";
 
 
 function App() {
@@ -17,10 +19,13 @@ function App() {
           <Route index element={<Login/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />}>
+            <Route path="analytics"index element={<Analytics />}/> 
             <Route path="assets" element={<TableAsset />}/>
             <Route path="add" element={<AddAsset />} />
             <Route path="update/:id" element={<UpdateAsset />} />
             <Route path="calendar" element={<Calendar />}/>
+            <Route path="users" element={<Users />}/>
+
           </Route>
         </Routes>
       </BrowserRouter>

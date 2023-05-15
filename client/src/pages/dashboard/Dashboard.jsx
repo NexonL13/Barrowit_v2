@@ -1,21 +1,15 @@
 import axios from "axios"
 import { useEffect,useState } from "react"
-import { Link, Navigate, Outlet, useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
+import Header from "./components/Header"
+import Sidebar from "./components/Sidebar"
 
 const Dashboard = () => {
   const [adminProfile,setAdminProfile] = useState({})
-  const navigate = useNavigate()
-
   axios.defaults.withCredentials = true
-  const logOut = () => {
-    axios.get("http://localhost:3000/auth/logout").then(() => {
-      navigate('/')
-    })
-  }
-
   useEffect(() => {
     const getAdminProfile = () => { 
-      axios.get("http://localhost:3000/auth/login").then(res => {
+      axios.get("http://localhost:3000/auth/login", {withCredentials: true}).then(res => {
         setAdminProfile(res.data.admin)
       })
     }
@@ -23,16 +17,15 @@ const Dashboard = () => {
   }, [])
 
   return (
-    typeof adminProfile === 'undefined' ?
-    <Navigate to="/" />
-    :
-    <>
-    <div className="flex space-between px-10 py-5">
-    <h1>{`Profile Name: ${adminProfile?.firstName} ${adminProfile?.middleName} ${adminProfile?.lastName}`}</h1>
-    <button className="btn btn-xs block ms-auto" onClick={logOut}>Log out</button> 
+    typeof adminProfile !== "undefined" 
+    ?
+    <div className="relative">
+    <Header admin={adminProfile}/>
+    <Sidebar />
     </div>
-    <Outlet/>
-    </>
+    :
+    <Navigate to="/" />
+    
   )
 }
 
