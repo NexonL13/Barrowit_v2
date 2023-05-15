@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser')
 
 app.use(express.json())
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: true,
     credentials: true
 }))
 app.use(express.urlencoded({extended: true}))
@@ -19,7 +19,7 @@ app.use(session({
     key: 'admin_id',
     secret: 'zeieist',
 	resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
 	cookie: {
 	    maxAge: 24 * 60 * 60 * 1000,
 	    secure: false,

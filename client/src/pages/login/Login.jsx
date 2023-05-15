@@ -19,7 +19,7 @@ const Login = () => {
     password: Yup.string().min(6, 'Must be at least 6 characters').max(20, 'Must be at most 20 characters').required('Password is a required field')
   })
 
-  
+  axios.defaults.withCredentials = true
   const onSubmit = async (values) => {
      axios.post("http://localhost:3000/auth/login", values).then((res)=> {
       if(res.data.error) {

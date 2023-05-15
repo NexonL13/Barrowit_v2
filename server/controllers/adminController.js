@@ -37,9 +37,12 @@ const loginAdmin = async (req,res) => {
 
     if(admin) {
         bcrypt.compare(password, admin.password).then((match) => {
-            if(!match) return res.json({error:"Incorrect username and password"})
-            req.session.admin = admin
-            return res.json({loggedIn: true})
+            if(!match) {
+                return res.json({error:"Incorrect username and password"})
+            }else {
+                req.session.admin = admin
+                return res.json({loggedIn: true})
+            }
         })
     }else {
         return res.json({loggedIn: false})
