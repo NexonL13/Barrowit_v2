@@ -3,7 +3,7 @@ import React from 'react'
 const TextError = (props) => {
   return (
     <>
-    <label className="block text-xs font-medium text-red-500 italic">{`* ${props.children}.`}</label>
+    <label className="block text-xs font-medium text-red-400 italic">{`* ${props.children}.`}</label>
     </>
   )
 }

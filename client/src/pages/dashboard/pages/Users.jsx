@@ -6,10 +6,28 @@ const people = [
       title: 'Admin Clerk',
       department: 'Barangay',
       email: 'lindsay.walton@example.com',
-      role: 'Member',
+      role: 'Admin',
       image:
         'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     },
+    {
+      name: 'Judith Nicholson',
+      title: 'Property Custodian',
+      department: 'Barangay',
+      email: 'judith.nicholson@example.com',
+      role: 'Member',
+      image:
+        'https://images.unsplash.com/photo-1607569490015-7101095605ed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80',
+    },
+    {
+      name: 'Josh Charles',
+      title: 'Chairman',
+      department: 'Barangay',
+      email: 'josh.charles@example.com',
+      role: 'Super Admin',
+      image:
+        'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80',
+    }
     // More people...
   ]
 
@@ -18,10 +36,9 @@ const Users = () => {
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-xl font-semibold text-gray-900">Users</h1>
-          <p className="mt-2 text-sm text-gray-700">
-            A list of all the users in your account including their name, title, email and role.
-          </p>
+        <div>
+      <h1 className="text-xl font-medium py-5">Users</h1>
+        </div>
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
           <button

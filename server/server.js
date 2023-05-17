@@ -31,8 +31,10 @@ app.use(session({
 
 const adminRouter = require('./routes/admin')
 const assetRouter = require('./routes/asset')
+const auditRouter = require('./routes/audit')
 app.use('/auth', adminRouter)
 app.use('/asset', assetRouter)
+app.use('/audit', auditRouter)
 
 db.sequelize.sync().then(()=> {
     app.listen(port, () => {

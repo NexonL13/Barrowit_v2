@@ -90,7 +90,7 @@ export default function Calendar() {
   return (
     <div className="lg:flex lg:h-full lg:flex-col">
       <header className="flex items-center justify-between border-b border-gray-200 py-4 px-6 lg:flex-none">
-        <h1 className="text-lg font-semibold text-gray-900">
+        <h1 className="text-lg font-medium text-gray-900">
           <time dateTime="2022-01">May 2023</time>
         </h1>
         <div className="flex items-center">
@@ -197,7 +197,7 @@ export default function Calendar() {
             <div className="ml-6 h-6 w-px bg-gray-300" />
             <button
               type="button"
-              className="ml-6 rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="ml-6 rounded-md border border-transparent bg-orange-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-1"
             >
               Add event
             </button>
@@ -345,7 +345,7 @@ export default function Calendar() {
                   dateTime={day.date}
                   className={
                     day.isToday
-                      ? 'flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white'
+                      ? 'flex h-6 w-6 items-center justify-center rounded-full bg-green-400 font-semibold text-white'
                       : undefined
                   }
                 >
@@ -356,12 +356,12 @@ export default function Calendar() {
                     {day.events.slice(0, 2).map((event) => (
                       <li key={event.id}>
                         <a href={event.href} className="group flex">
-                          <p className="flex-auto truncate font-medium text-gray-900 group-hover:text-indigo-600">
+                          <p className="flex-auto truncate font-medium text-gray-900 group-hover:text-green-400">
                             {event.name}
                           </p>
                           <time
                             dateTime={event.datetime}
-                            className="ml-3 hidden flex-none text-gray-500 group-hover:text-indigo-600 xl:block"
+                            className="ml-3 hidden flex-none text-gray-500 group-hover:text-green-400 xl:block"
                           >
                             {event.time}
                           </time>
@@ -383,7 +383,7 @@ export default function Calendar() {
                   day.isCurrentMonth ? 'bg-white' : 'bg-gray-50',
                   (day.isSelected || day.isToday) && 'font-semibold',
                   day.isSelected && 'text-white',
-                  !day.isSelected && day.isToday && 'text-indigo-600',
+                  !day.isSelected && day.isToday && 'text-green-400',
                   !day.isSelected && day.isCurrentMonth && !day.isToday && 'text-gray-900',
                   !day.isSelected && !day.isCurrentMonth && !day.isToday && 'text-gray-500',
                   'flex h-14 flex-col py-2 px-3 hover:bg-gray-100 focus:z-10'
@@ -393,7 +393,7 @@ export default function Calendar() {
                   dateTime={day.date}
                   className={classNames(
                     day.isSelected && 'flex h-6 w-6 items-center justify-center rounded-full',
-                    day.isSelected && day.isToday && 'bg-indigo-600',
+                    day.isSelected && day.isToday && 'bg-green-400',
                     day.isSelected && !day.isToday && 'bg-gray-900',
                     'ml-auto'
                   )}

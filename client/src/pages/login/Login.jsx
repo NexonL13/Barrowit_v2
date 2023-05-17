@@ -33,7 +33,7 @@ const Login = () => {
 
 
   return (
-    <section className="bg-white">
+    <section className="bg-gray-100">
   <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
     <section
       className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6"
@@ -56,11 +56,6 @@ const Login = () => {
         <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
             Admin Login
         </h2>
-
-        <p className="mt-4 leading-relaxed text-white/90">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam
-          dolorum aliquam, quibusdam aperiam voluptatum.
-        </p>
       </div>
     </section>
 
@@ -85,11 +80,6 @@ const Login = () => {
           >
             Admin Login
           </h1>
-
-          <p className="mt-4 leading-relaxed text-gray-500">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-            nam dolorum aliquam, quibusdam aperiam voluptatum.
-          </p>
         </div>
         <Formik
          initialValues={initialValues}
@@ -124,7 +114,7 @@ const Login = () => {
           <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
             <button
               type="submit"
-              className="inline-block shrink-0 rounded-md border border-green-600 bg-green-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-green-600 focus:outline-none focus:ring active:text-green-500"
+              className="inline-block shrink-0 rounded-md border border-green-400 bg-green-400 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-green-400 focus:outline-none focus:ring active:text-green-500"
             >
               Login
             </button>

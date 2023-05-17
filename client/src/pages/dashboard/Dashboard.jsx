@@ -21,7 +21,7 @@ const Dashboard = () => {
     ?
     <div className="relative">
     <Header admin={adminProfile}/>
-    <Sidebar />
+    <Sidebar adminRole={adminProfile.position}/>
     </div>
     :
     <Navigate to="/" />

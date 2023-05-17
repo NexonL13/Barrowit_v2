@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect,useState } from "react"
 import { Navigate, Outlet, useNavigate } from "react-router-dom"
+import { GiHamburgerMenu } from "react-icons/gi"
 
 const Header = (props) => {
   const navigate = useNavigate()
@@ -13,25 +14,30 @@ const Header = (props) => {
 
 
   return (
-    <div className="navbar bg-green-400 border border-b-gray-300">
+    <div className="navbar bg-gray-100 border border-b-gray-300">
   <div className="flex-1">
-  <label htmlFor="sidebar" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
-    <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+  <label htmlFor="sidebar" className="btn bg-transparent border-none text-orange-400 hover:bg-orange-500 hover:text-white drawer-button lg:hidden"><GiHamburgerMenu/></label>
+    <a className="btn btn-ghost normal-case text-xl"><span className="text-lime-200">Barrow</span><span className="text-orange-400">It</span></a>
   </div>
   <div className="flex-none">
     <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost btn-circle">
         <div className="indicator">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-          <span className="badge badge-sm indicator-item">8</span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" />
+</svg>
+
+          <span className="badge badge-sm indicator-item">3</span>
         </div>
       </label>
       <div tabIndex={0} className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
         <div className="card-body">
-          <span className="font-bold text-lg">8 Items</span>
-          <span className="text-info">Subtotal: $999</span>
+          <span className="font-bold text-lg">Notification</span>
+          <span className="text-gray-400 text-ellipsis block">Lorem ipsum dolor sit amet.</span>
+          <span className="text-gray-400 text-ellipsis block">Lorem ipsum dolor sit amet.</span>
+          <span className="text-gray-400 text-ellipsis block">Lorem ipsum dolor sit amet.</span>
           <div className="card-actions">
-            <button className="btn btn-primary btn-block">View cart</button>
+            <button className="btn btn-primary btn-block btn-sm">Show All</button>
           </div>
         </div>
       </div>
@@ -43,11 +49,10 @@ const Header = (props) => {
         </div>
       </label>
       <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-        <a>{`${props.admin?.firstName} ${props.admin?.middleName} ${props.admin?.lastName}`}</a>
-        <li>
+        <span className="text-sm font-medium">{`${props.admin?.firstName} ${props.admin?.middleName} ${props.admin?.lastName}`}</span>
+        <li onClick={() => navigate("profile")}>
           <a className="justify-between">
             Profile
-            <span className="badge">New</span>
           </a>
         </li>
         <li><a>Settings</a></li>

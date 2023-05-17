@@ -21,7 +21,7 @@ const TableAsset = () => {
   return (
     <div className="overflow-x-auto w-full px-5">
       <div>
-        <h2 className="text-2xl font-semibold leading-tight">Users</h2>
+        <h2 className="text-xl font-medium leading-tight">Users</h2>
       </div>
       <div className="my-2 flex sm:flex-row flex-col">
         <div className="flex flex-row mb-1 sm:mb-0">
@@ -73,7 +73,11 @@ const TableAsset = () => {
           />
         </div>
         <div className="block relative ms-auto my-auto">
-          <button className="btn btn-sm" onClick={() => navigate('/dashboard/add')}>Add Assets</button>
+          <button className="btn btn-sm  bg-orange-500 border-none hover:bg-orange-600" onClick={() => navigate('/dashboard/add')}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+</svg>
+          </button>
         </div>
       </div>
       <table className="table lg:table-normal md: table-normal sm:table-compact w-full">
@@ -82,7 +86,7 @@ const TableAsset = () => {
           <tr>
             <th>
               <label>
-                <input type="checkbox" className="checkbox" />
+                <input type="checkbox" className="checkbox checkbox-accent border border-gray-300" />
               </label>
             </th>
             <th className="font-semibold">Asset Name</th>
@@ -98,7 +102,7 @@ const TableAsset = () => {
             <tr key={index}>
               <th>
                 <label>
-                  <input type="checkbox" className="checkbox" />
+                  <input type="checkbox" className="checkbox checkbox-accent border border-gray-300" />
                 </label>
               </th>
               <td>
@@ -152,6 +156,8 @@ const TableAsset = () => {
           </tr>
         </tfoot>
       </table>
+      {assets < 0 ?
+      <>
       <div className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
         <span className="text-xs xs:text-sm text-gray-900">
           Showing 1 to 4 of 50 Entries
@@ -165,6 +171,13 @@ const TableAsset = () => {
           </button>
         </div>
       </div>
+      </>
+      :
+      <>
+      <div>
+      </div>
+      </>
+    }
     </div>
   );
 };

@@ -1,7 +1,21 @@
 import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { RxDashboard } from "react-icons/rx"
+import { FiPackage, FiUsers} from "react-icons/fi"
+import { AiOutlineCalendar, AiOutlineAudit } from "react-icons/ai"
+import { MdOutlineApproval, MdOutlineDocumentScanner } from "react-icons/md"
 
-const Sidebar = () => {
+const Sidebar = (props) => {
+  const navigate = useNavigate()
+  const sidebarRoutes = [
+    {section: "Dashboard", link:"analytics", icon: <RxDashboard/>},
+    {section: "Assets", link:"assets", icon:<FiPackage/>},
+    {section: "Calendar", link:"calendar", icon:<AiOutlineCalendar/>},
+    {section: "Users Account", link:"users", icon:<FiUsers/>},
+    {section: "Approval", link:"approval", icon:<MdOutlineApproval/>},
+    {section: "Audit Trails", link: "trail", icon: <AiOutlineAudit/>},
+    {section: "Request Documents", link:"document", icon:<MdOutlineDocumentScanner/>},
+  ]
   return (
     <div className="drawer drawer-mobile">
   <input id="sidebar" type="checkbox" className="drawer-toggle" />
@@ -10,17 +24,19 @@ const Sidebar = () => {
     <div className='h-screen p-10'>
     <Outlet />
     </div>
-    <label htmlFor="sidebar" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
   
   </div> 
   <div className="drawer-side">
     <label htmlFor="sidebar" className="drawer-overlay"></label> 
-    <ul className="menu p-4 w-64 bg-gray-200 text-base-content border border-r-gray-300">
+    <ul className="menu p-4 w-64 bg-gray-100 text-base-content border border-r-gray-300">
       {/* <!-- Sidebar content here --> */}
-      <Link to="analytics">Dashboard</Link>
-      <Link to="assets">Assets</Link>
-      <Link to="calendar">Calendar</Link>
-      <Link to="users">Users Account</Link>
+      {
+        sidebarRoutes.map((route, index)=> (
+          <li onClick={() => navigate(route.link)} key={index}>
+            <a><span className='text-green-400'>{route.icon}</span><span className='text-green-700'>{route.section}</span></a>
+            </li>
+        ))
+      }
     </ul>
   
   </div>

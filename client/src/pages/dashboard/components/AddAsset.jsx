@@ -69,7 +69,7 @@ const AddAsset = () => {
           <div className="max-w-xl lg:max-w-3xl">
           <div className="flex justify-between">
               <h1 className="text-xl font-light">Add Asset</h1>
-              <button onClick={() => navigate(-1)}><AiOutlineRollback className="text-teal-500 text-3xl"/></button>
+              <button onClick={() => navigate(-1)}><AiOutlineRollback className="text-orange-500 text-3xl"/></button>
             </div>
             <Formik
               initialValues={initialValues}
@@ -113,7 +113,7 @@ const AddAsset = () => {
                               : `Drag & Drop your files here`}
                           </p>
                           <svg
-                            className="z-10 w-8 h-8 text-teal-400"
+                            className="z-10 w-8 h-8 text-orange-500"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +176,7 @@ const AddAsset = () => {
                   <div className="col-span-12 sm:flex sm:items-center sm:gap-4 sm:px-auto">
                     <button
                       type="submit"
-                      className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 w-full"
+                      className="inline-block shrink-0 rounded-md border border-orange-500 bg-orange-500 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-orange-500 focus:outline-none focus:ring active:text-orange-600 w-full"
                     >
                       Add Asset
                     </button>

@@ -8,7 +8,7 @@ const NewUsers = () => {
         <div class="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
             <header class="flex px-5 py-4 border-b border-gray-100">
                 <h2 class="font-semibold text-gray-800">New Users</h2>
-                <button className='bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-15 ms-auto'>See New Users</button>
+                <button className='bg-orange-500 text-white active:bg-orange-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-15 ms-auto'>See New Users</button>
             </header>
             <div class="p-3">
                 <div class="overflow-x-auto">
@@ -38,7 +38,7 @@ const NewUsers = () => {
                                     <div class="text-left">alexshatov@gmail.com</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium text-green-700">05/16/2023</div>
+                                    <div class="text-left font-medium text-gray-500">05/16/2023</div>
                                 </td>
                             </tr>
                             <tr>
@@ -52,7 +52,7 @@ const NewUsers = () => {
                                     <div class="text-left">philip.h@gmail.com</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium text-green-700">05/16/2023</div>
+                                    <div class="text-left font-medium text-gray-500">05/16/2023</div>
                                 </td>
                             </tr>
                             <tr>
@@ -66,7 +66,7 @@ const NewUsers = () => {
                                     <div class="text-left">mirkofisuk@gmail.com</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium text-green-700">05/16/2023</div>
+                                    <div class="text-left font-medium text-gray-500">05/16/2023</div>
                                 </td>
                             </tr>
                             <tr>
@@ -80,7 +80,7 @@ const NewUsers = () => {
                                     <div class="text-left">olga.s@cool.design</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium text-green-700">05/16/2023</div>
+                                    <div class="text-left font-medium text-gray-500">05/16/2023</div>
                                 </td>
                             </tr>
                             <tr>
@@ -94,7 +94,7 @@ const NewUsers = () => {
                                     <div class="text-left">longburak@gmail.com</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-medium text-green-700">05/16/2023</div>
+                                    <div class="text-left font-medium text-gray-500">05/16/2023</div>
                                 </td>
                             </tr>
                         </tbody>
