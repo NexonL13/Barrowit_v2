@@ -6,7 +6,7 @@ import DeleteModal from "../components/DeleteModal";
 
 const TableAsset = () => {
   const navigate = useNavigate();
-  const url = "http://localhost:5173/images/";
+  const url = "../../../../public/images/";
   const [assets, setAssets] = useState([]);
   const [isDelete, setIsDelete] = useState(false);
 
@@ -109,7 +109,7 @@ const TableAsset = () => {
                 <div className="flex items-center space-x-3">
                   <div className="avatar">
                     <div className="mask mask-squircle w-12 h-12">
-                      <img src={`${url + asset.image}`} />
+                      <img src={`${url + asset.image}`} alt="img" />
                     </div>
                   </div>
                   <div>

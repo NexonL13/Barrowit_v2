@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect,useState } from "react"
 import { Navigate, Outlet, useNavigate } from "react-router-dom"
 import { GiHamburgerMenu } from "react-icons/gi"
-
+import logo from "../../../../public/images/logo.png"
 const Header = (props) => {
   const navigate = useNavigate()
 
@@ -17,7 +17,12 @@ const Header = (props) => {
     <div className="navbar bg-gray-100 border border-b-gray-300">
   <div className="flex-1">
   <label htmlFor="sidebar" className="btn bg-transparent border-none text-orange-400 hover:bg-orange-500 hover:text-white drawer-button lg:hidden"><GiHamburgerMenu/></label>
-    <a className="btn btn-ghost normal-case text-xl"><span className="text-lime-200">Barrow</span><span className="text-orange-400">It</span></a>
+    <div className="btn-ghost normal-case text-xl flex align-middle justify-center items-center font-bold">
+        <img src={logo} alt="logo" className="w-15 h-10" />
+        <a className="align-middle"><span className="text-lime-200">
+      Barrow</span><span className="text-orange-400">It</span></a>
+      </div>
+    
   </div>
   <div className="flex-none">
     <div className="dropdown dropdown-end">
