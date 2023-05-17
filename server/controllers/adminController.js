@@ -32,9 +32,7 @@ const isLoggedIn = (req, res) => {
 
 const loginAdmin = async (req,res) => {
     const { email, password } = req.body
-
     const admin = await Admin.findOne({where: {email: email}})
-
     if(admin) {
         bcrypt.compare(password, admin.password).then((match) => {
             if(!match) {
@@ -56,5 +54,6 @@ const logoutAdmin = (req, res) => {
         return res.end()
     }
 }
+
 
 module.exports = { registerAdmin, loginAdmin, isLoggedIn, logoutAdmin }

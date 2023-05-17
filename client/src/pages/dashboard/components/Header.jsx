@@ -13,7 +13,7 @@ const Header = (props) => {
 
 
   return (
-    <div className="navbar bg-gray-200 border border-b-gray-300">
+    <div className="navbar bg-green-400 border border-b-gray-300">
   <div className="flex-1">
   <label htmlFor="sidebar" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
     <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
