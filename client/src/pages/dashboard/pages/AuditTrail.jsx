@@ -31,7 +31,7 @@ const AuditTrail = () => {
     <tbody>
       {auditTrail?.map(trail => (
         <tr key={trail.id}>
-        <th>{trail.recordId}</th> 
+        <th>{trail.id}</th> 
         <td>{trail.actor}</td> 
         <td><span className='font-medium badge badge-xs badge-accent text-white'>{trail.role}</span></td>
         <td>{trail.description}</td> 

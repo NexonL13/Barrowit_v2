@@ -6,9 +6,9 @@ import { AiOutlineUserSwitch } from "react-icons/ai"
 import {FaServer } from "react-icons/fa"
 
 const stats = [
-    { id: 1, name: 'Total Assets', stat: '1000', icon: GoPackage, change: '122', changeType: 'increase' },
+    { id: 1, name: 'Total Assets', stat: '1000', icon: GoPackage, change: '122', changeType: 'decrease' },
     { id: 2, name: 'Total Users', stat: '600', icon: HiOutlineUsers, change: '5.4%', changeType: 'increase' },
-    { id: 3, name: 'New User', stat: '100', icon: AiOutlineUserSwitch, change: '3.2%', changeType: 'decrease' },
+    { id: 3, name: 'New User', stat: '100', icon: AiOutlineUserSwitch, change: '3.2%', changeType: 'increase' },
     { id: 4, name: 'Server Uptime', stat: '152 days', icon: FaServer},
   ]
   
@@ -41,11 +41,8 @@ const Statistics = () => {
                   'ml-2 flex items-baseline text-sm font-semibold'
                 )}
               >
-                {item.changeType === 'increase' ? (
-                  <AiOutlineArrowUp className="h-5 w-5 flex-shrink-0 self-center text-green-500" aria-hidden="true" />
-                ) : (
-                  <AiOutlineArrowDown className="h-5 w-5 flex-shrink-0 self-center text-red-500" aria-hidden="true" />
-                )}
+                  {item.changeType === 'increase' && <AiOutlineArrowUp className="h-5 w-5 flex-shrink-0 self-center text-green-500" aria-hidden="true" />}
+                  {item.changeType === 'decrease' && <AiOutlineArrowDown className="h-5 w-5 flex-shrink-0 self-center text-red-500" aria-hidden="true" />}
 
                 <span className="sr-only"> {item.changeType === 'increase' ? 'Increased' : 'Decreased'} by </span>
                 {item.change}

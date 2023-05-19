@@ -8,13 +8,13 @@ import { MdOutlineApproval, MdOutlineDocumentScanner } from "react-icons/md"
 const Sidebar = (props) => {
   const navigate = useNavigate()
   const sidebarRoutes = [
-    {section: "Dashboard", link:"analytics", icon: <RxDashboard/>},
+    {section: "Dashboard", link:"", icon: <RxDashboard/>},
     {section: "Assets", link:"assets", icon:<FiPackage/>},
     {section: "Calendar", link:"calendar", icon:<AiOutlineCalendar/>},
     {section: "Users Account", link:"users", icon:<FiUsers/>},
     {section: "Approval", link:"approval", icon:<MdOutlineApproval/>},
-    {section: "Audit Trails", link: "trail", icon: <AiOutlineAudit/>},
     {section: "Request Documents", link:"document", icon:<MdOutlineDocumentScanner/>},
+    {section: "Audit Trails", link: "trail", icon: <AiOutlineAudit/>, access: props.adminRole === 'Super Admin' ? 'visible' : 'hidden'},
   ]
   return (
     <div className="drawer drawer-mobile">
@@ -32,7 +32,7 @@ const Sidebar = (props) => {
       {/* <!-- Sidebar content here --> */}
       {
         sidebarRoutes.map((route, index)=> (
-          <li onClick={() => navigate(route.link)} key={index}>
+          <li onClick={() => navigate(route.link)} key={index} className={route.access}>
             <a><span className='text-green-400'>{route.icon}</span><span className='text-green-700'>{route.section}</span></a>
             </li>
         ))

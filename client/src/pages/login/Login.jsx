@@ -6,7 +6,7 @@ import { RiAdminLine } from 'react-icons/ri'
 import * as Yup from 'yup'
 import axios from 'axios'
 import WarningError from '../forms/formik/components/WarningError'
-import barangay_bg from "../../assets/images/Barangay.jpg"
+import barangay_bg from "../../assets/images/Barangay.jpeg"
 
 const Login = () => {
   const navigate = useNavigate()
@@ -19,7 +19,7 @@ const Login = () => {
     email: Yup.string().email('Must be a valid email').required('Email is a required field'),
     password: Yup.string().min(6, 'Must be at least 6 characters').max(20, 'Must be at most 20 characters').required('Password is a required field')
   })
-
+  
   axios.defaults.withCredentials = true
   const onSubmit = async (values) => {
      axios.post("http://localhost:3000/auth/login", values).then((res)=> {
@@ -111,18 +111,13 @@ const Login = () => {
                 name="password"
               />
           </div>
-          <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
+          <div className="col-span-15 sm:flex sm:items-center sm:gap-4">
             <button
               type="submit"
               className="inline-block shrink-0 rounded-md border border-green-400 bg-green-400 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-green-400 focus:outline-none focus:ring active:text-green-500"
             >
               Login
             </button>
-
-            <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-              Doesn&apos;t have an account?
-              <Link to="/register" className="text-gray-700 underline ps-1">Register</Link>.
-            </p>
           </div>
         </Form>
         </Formik>

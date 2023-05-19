@@ -1,9 +1,10 @@
 const { Asset, Audit, Admin } = require('../models')
 const multer = require('multer')
 const path = require('path')
+const fs = require('fs')
 
 const getAssets = async (req,res) => {
-    const listOfAsset = await Asset.findAll()
+    const listOfAsset = await Asset.findAll({ order: [['createdAt', 'DESC']] })
     res.json(listOfAsset)
 }
 
@@ -24,7 +25,7 @@ const addAsset = async (req,res) => {
         adminId: req.session.admin.id
     }
 
-    const existAsset = await Asset.findOne({where: {name: asset.name}, actor: req.session.admin})
+    const existAsset = await Asset.findOne({where: {name: asset.name}})
     if(existAsset) {
         res.json({error: 'Asset already exist'})
     }else {
@@ -45,6 +46,13 @@ const updateAsset = async (req,res) => {
             adminId: req.session.admin.id
     }
     {req.file && (asset.image = req.file.filename)}
+    const existAsset = await Asset.findOne({where: {name: asset.name}})
+    if(existAsset) {
+        res.json({error: 'Asset already exist'})
+    }else {
+        await Asset.create(asset)
+        res.json(asset)
+    }
     
         const condition = {
             where: {id : assetId}
@@ -54,7 +62,7 @@ const updateAsset = async (req,res) => {
         res.json(asset)
 }
 
-const deleteAsset = (req,res) => {
+const deleteAsset = async (req,res) => {
     const assetId = req.params.assetId
     Asset.destroy({
         where: { id: assetId },
@@ -65,12 +73,13 @@ const deleteAsset = (req,res) => {
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, '../client/public/images')
+        cb(null, '../client/public/src/images')
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname))
     }
 })
+
 
 const upload = multer({
     storage: storage,
@@ -83,7 +92,7 @@ const upload = multer({
         if(mimeType && extname) {
             return cb(null, true)
         }
-        cb('Give proper files formate to upload')
+        cb(new Error('Invalid file type'))
     }
 })
 
@@ -112,7 +121,6 @@ Asset.afterBulkUpdate(async (asset) => {
 })
 
 Asset.beforeBulkDestroy(async (asset) => {
-    console.log(asset)
     const deleted = await Asset.findOne({where: {id: asset.where.id}})
     const deletedAsset = deleted.dataValues
     const { actor } = asset
@@ -123,12 +131,6 @@ Asset.beforeBulkDestroy(async (asset) => {
         role: actor.position
     })
 })
-
-
-
-
-
-
 
 module.exports = {
     getAssets,

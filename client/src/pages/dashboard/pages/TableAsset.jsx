@@ -1,23 +1,22 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { RiDeleteBin6Line, RiEdit2Line } from "react-icons/ri";
-import DeleteModal from "../components/DeleteModal";
+import AssetRow from "../components/tableassets/AssetRow";
+import DeleteModal from "../components/tableassets/DeleteModal";
 
 const TableAsset = () => {
   const navigate = useNavigate();
-  const url = "../../../../public/images/";
-  const [assets, setAssets] = useState([]);
-  const [isDelete, setIsDelete] = useState(false);
+  const [listOfAssets, setListOfAssets] = useState([]);
+  const [asset,setAsset] = useState({});
 
   const fetchAssets = async () => {
     const res = await axios.get("http://localhost:3000/asset");
-    setAssets(res.data);
+    setListOfAssets(res.data);
   };
 
   useEffect(() => {
     fetchAssets();
-  }, [isDelete]);
+  }, []);
   return (
     <div className="overflow-x-auto w-full px-5">
       <div>
@@ -97,66 +96,20 @@ const TableAsset = () => {
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
-          {assets.map((asset, index) => (
-            <tr key={index}>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox checkbox-accent border border-gray-300" />
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center space-x-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img src={`${url + asset.image}`} alt="img" />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-bold">{asset.name}</div>
-                    <div className="badge badge-ghost badge-sm">
-                      {asset.category}
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td>{asset.description}</td>
-              <td>{asset.stock}</td>
-              <td>{asset.sponsor}</td>
-              <th>
-                <button
-                  className="btn btn-ghost btn-xs"
-                  onClick={() => navigate(`/dashboard/update/${asset.id}`)}
-                >
-                  <div className="text-2xl text-blue-700">
-                    <RiEdit2Line />
-                  </div>
-                </button>
-                <label htmlFor="delete-modal" className="btn btn-ghost btn-xs ">
-                  <div className="text-2xl text-red-700">
-                    <RiDeleteBin6Line />
-                  </div>
-                </label>
-                <DeleteModal
-                  name={asset.name}
-                  description={asset.description}
-                  id={asset.id}
-                  setIsDelete={setIsDelete}
-                />
-              </th>
-            </tr>
+          {listOfAssets.map((asset) => (
+            <AssetRow asset={asset} key={asset.id} setAsset={setAsset}/>
           ))}
         </tbody>
         {/* foot */}
         <tfoot>
           <tr>
             <td colSpan={6} className="text-center">
-              {assets <= 0 && 'No assets found.'}
+              {listOfAssets <= 0 && 'No assets found.'}
             </td>
           </tr>
         </tfoot>
       </table>
-      {assets < 0 ?
+      {listOfAssets < 0 ?
       <>
       <div className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
         <span className="text-xs xs:text-sm text-gray-900">
@@ -178,6 +131,7 @@ const TableAsset = () => {
       </div>
       </>
     }
+    <DeleteModal listOfAssets={listOfAssets} setListOfAssets={setListOfAssets} asset={asset} />
     </div>
   );
 };

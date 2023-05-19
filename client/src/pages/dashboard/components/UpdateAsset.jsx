@@ -10,6 +10,7 @@ import { AiOutlineRollback } from "react-icons/ai"
 
 const UpdateAsset = () => {
   const [assets, setAssets] = useState();
+  const [exist, setExist] = useState(false);
   const [fileName, setFileName] = useState();
   const params = useParams();
   const navigate = useNavigate();
@@ -63,8 +64,11 @@ const UpdateAsset = () => {
     await axios
       .put(`http://localhost:3000/asset/${params.id}`, formData)
       .then((res) => {
-        console.log(res.data);
-        navigate('/dashboard/assets')
+        if (res.data.error) {
+          setExist(true);
+        } else {
+          navigate("/dashboard/assets");
+        }
       });
   };
 
@@ -90,6 +94,14 @@ const UpdateAsset = () => {
             >
               {(formik) => (
                 <Form className="mt-8 grid grid-cols-12 gap-6">
+                  <div
+                    className={`${exist ? "visible" : "hidden"} col-span-12`}
+                  >
+                    <WarningError
+                      warningTitle="Asset's Name Exist"
+                      warningText="This asset's name is already exist. Write another name."
+                    />
+                  </div>
                   <Field name="image">
                     {() => (
                       <div className="col-span-12 bg-gray-100 rounded-lg shadow-inner h-40">

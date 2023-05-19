@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect,useState } from "react"
 import { Navigate, Outlet, useNavigate } from "react-router-dom"
 import { GiHamburgerMenu } from "react-icons/gi"
-import logo from "../../../../public/images/logo.png"
+import logo from "/src/logo.png"
 const Header = (props) => {
   const navigate = useNavigate()
 
