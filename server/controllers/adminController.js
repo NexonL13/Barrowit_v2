@@ -43,7 +43,7 @@ const loginAdmin = async (req,res) => {
             }
         })
     }else {
-        return res.json({loggedIn: false})
+        return res.json({loggedIn: false, error:"Incorrect email"})
     }
 }
 

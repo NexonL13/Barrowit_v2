@@ -5,7 +5,6 @@ const cors = require('cors')
 const port = 3000
 
 const session = require('express-session')
-const cookieParser = require('cookie-parser')
 
 app.use(express.json())
 app.use(cors({
@@ -13,7 +12,6 @@ app.use(cors({
     credentials: true
 }))
 app.use(express.urlencoded({extended: true}))
-app.use(cookieParser())
 
 app.use(session({
     key: 'admin_id',
@@ -23,7 +21,7 @@ app.use(session({
 	cookie: {
 	    secure: false,
         httpOnly: true,
-        sameSite: 'strict'
+        sameSite: 'strict',
 	}
 }))
 

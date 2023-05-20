@@ -1,7 +1,7 @@
 const { Asset, Audit, Admin } = require('../models')
-const multer = require('multer')
-const path = require('path')
-const fs = require('fs')
+
+
+
 
 const getAssets = async (req,res) => {
     const listOfAsset = await Asset.findAll({ order: [['createdAt', 'DESC']] })
@@ -13,6 +13,7 @@ const getSingleAsset = async (req,res) => {
     const asset = await Asset.findOne({where: {id: assetId}})
     res.json(asset)
 }
+
 
 const addAsset = async (req,res) => {
     const asset = {
@@ -71,30 +72,7 @@ const deleteAsset = async (req,res) => {
     res.json("Deleted")
 }
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, '../client/public/src/images')
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname))
-    }
-})
 
-
-const upload = multer({
-    storage: storage,
-    limits: { fileSize: '1000000' },
-    fileFilter: (req, file, cb) => {
-        const fileTypes = /jpeg|jpg|png|gif/
-        const mimeType = fileTypes.test(file.mimetype)  
-        const extname = fileTypes.test(path.extname(file.originalname))
-
-        if(mimeType && extname) {
-            return cb(null, true)
-        }
-        cb(new Error('Invalid file type'))
-    }
-})
 
 //Asset Hook
 
@@ -138,5 +116,4 @@ module.exports = {
     addAsset,
     updateAsset,
     deleteAsset,
-    upload
 }
