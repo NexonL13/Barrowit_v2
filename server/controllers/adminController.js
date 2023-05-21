@@ -1,6 +1,11 @@
 const { Admin } = require('../models')
 const bcrypt = require('bcrypt')
 
+const getAdmins = async (req, res) => {
+    const listOfAdmins = await Admin.findAll()
+    res.json(listOfAdmins)
+}
+
 const registerAdmin = async (req, res) => {
     const { firstName, middleName, lastName, email, password, position} = req.body
 
@@ -56,4 +61,4 @@ const logoutAdmin = (req, res) => {
 }
 
 
-module.exports = { registerAdmin, loginAdmin, isLoggedIn, logoutAdmin }
+module.exports = { registerAdmin, loginAdmin, isLoggedIn, logoutAdmin, getAdmins }
