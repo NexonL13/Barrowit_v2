@@ -1,38 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import AddUser from '../components/AddUser'
 
-
-const people = [
-    {
-      name: 'Lindsay Walton',
-      title: 'Admin Clerk',
-      department: 'Barangay',
-      email: 'lindsay.walton@example.com',
-      role: 'Admin',
-      image:
-        'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    {
-      name: 'Judith Nicholson',
-      title: 'Property Custodian',
-      department: 'Barangay',
-      email: 'judith.nicholson@example.com',
-      role: 'Member',
-      image:
-        'https://images.unsplash.com/photo-1607569490015-7101095605ed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80',
-    },
-    {
-      name: 'Josh Charles',
-      title: 'Chairman',
-      department: 'Barangay',
-      email: 'josh.charles@example.com',
-      role: 'Super Admin',
-      image:
-        'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80',
-    }
-    // More people...
-  ]
 
 const Users = () => {
   const navigate = useNavigate()

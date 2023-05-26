@@ -9,7 +9,7 @@ const getAdmins = async (req, res) => {
 const registerAdmin = async (req, res) => {
     const { firstName, middleName, lastName, email, password, position} = req.body
 
-    const existAccount = await Admin.findOne({where: {firstName: firstName, middleName: middleName, lastName: lastName, email: email}})
+    const existAccount = await Admin.findOne({where: {email: email}})
     if(existAccount) {
         res.json({error:"Already Exists"})
     }else {

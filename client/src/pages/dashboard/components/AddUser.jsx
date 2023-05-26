@@ -6,8 +6,9 @@ import * as Yup from 'yup'
 import axios from 'axios'
 import FormikControl from '../../forms/formik/FormikControl'
 import WarningError from '../../forms/formik/components/WarningError'
+import Users from '../pages/Users'
 
-const AddUser = () => {
+const AddUser = ({setIsAdded}) => {
   const navigate = useNavigate()
   const [exist,setExist] = useState(false)
 
@@ -137,6 +138,7 @@ const AddUser = () => {
             <button
               type="submit"
               className="inline-block shrink-0 rounded-md border border-green-400 bg-green-400 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-green-400 focus:outline-none focus:ring active:text-green-500"
+              onClick={() => navigate(-1)}
               >
               Create an account
             </button>
