@@ -34,6 +34,7 @@ const addAsset = async (req,res) => {
       
 }
 
+
 const updateAsset = async (req,res) => {
     const assetId = req.params.assetId
 
@@ -45,6 +46,19 @@ const updateAsset = async (req,res) => {
             sponsor: req.body.sponsor,
             adminId: req.session.admin.id
     } 
+    // const upload = multer().single('image')
+    // upload(req, res, (error) => {
+    //     if (error instanceof multer.MulterError) {
+    //       // A Multer error occurred when uploading.
+    //       res.json({fileError: error.message})
+    //     } else {
+    //       // An unknown error occurred when uploading.
+    //       res.json({fileError: error.message})
+    //     }
+    //       // Everything went fine.
+    //       console.log(req.file)
+    //   })
+    
 
     const existAsset = await Asset.findOne({where: {name: asset.name}})
     if(existAsset) {

@@ -1,6 +1,7 @@
 const multer = require('multer')
 const path = require('path')
 
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, '../client/public/src/images')
@@ -25,7 +26,7 @@ const middleware = {
 
 upload: multer({
     storage: storage,
-    limits: { fileSize: 1000},
+    limits: { fileSize: 10 * 1024 * 1024},
     fileFilter: (req, file, cb) => {
         const fileTypes = /jpeg|jpg|png|gif/
         const mimeType = fileTypes.test(file.mimetype)  
@@ -37,7 +38,7 @@ upload: multer({
         cb(new Error('Invalid file type'))
     }
 }).single('image')
-  
+
 }
 
 module.exports = middleware
