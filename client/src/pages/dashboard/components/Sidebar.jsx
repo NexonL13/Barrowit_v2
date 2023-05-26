@@ -7,6 +7,7 @@ import { MdOutlineApproval, MdOutlineDocumentScanner } from "react-icons/md"
 
 const Sidebar = (props) => {
   const navigate = useNavigate()
+  const superAccess = props.adminRole === 'Super Admin' ? 'visible' : 'hidden'
   const sidebarRoutes = [
     {section: "Dashboard", link:"", icon: <RxDashboard/>},
     {section: "Assets", link:"assets", icon:<FiPackage/>},
@@ -14,14 +15,14 @@ const Sidebar = (props) => {
     {section: "Users Account", link:"users", icon:<FiUsers/>},
     {section: "Approval", link:"approval", icon:<MdOutlineApproval/>},
     {section: "Request Documents", link:"document", icon:<MdOutlineDocumentScanner/>},
-    {section: "Audit Trails", link: "trail", icon: <AiOutlineAudit/>, access: props.adminRole === 'Super Admin' ? 'visible' : 'hidden'},
+    {section: "Audit Trails", link: "trail", icon: <AiOutlineAudit/>, access: superAccess },
   ]
   return (
     <div className="drawer drawer-mobile">
   <input id="sidebar" type="checkbox" className="drawer-toggle" />
   <div className="drawer-content flex-1 flex-col items-center justify-center">
     {/* <!-- Page content here --> */}
-    <div className='h-screen p-10'>
+    <div className='min-h-screen p-10'>
     <Outlet />
     </div>
   

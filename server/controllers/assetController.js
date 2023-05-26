@@ -1,8 +1,5 @@
 const { Asset, Audit, Admin } = require('../models')
 
-
-
-
 const getAssets = async (req,res) => {
     const listOfAsset = await Asset.findAll({ order: [['createdAt', 'DESC']] })
     res.json(listOfAsset)
@@ -26,6 +23,7 @@ const addAsset = async (req,res) => {
         adminId: req.session.admin.id
     }
 
+    
     const existAsset = await Asset.findOne({where: {name: asset.name}})
     if(existAsset) {
         res.json({error: 'Asset already exist'})
@@ -38,6 +36,7 @@ const addAsset = async (req,res) => {
 
 const updateAsset = async (req,res) => {
     const assetId = req.params.assetId
+
     const asset = {
             name: req.body.name,
             description: req.body.description,
@@ -45,29 +44,24 @@ const updateAsset = async (req,res) => {
             category: req.body.category,
             sponsor: req.body.sponsor,
             adminId: req.session.admin.id
-    }
-    {req.file && (asset.image = req.file.filename)}
+    } 
+
     const existAsset = await Asset.findOne({where: {name: asset.name}})
     if(existAsset) {
+        await Asset.update(asset, {where: {id: assetId}})
         res.json({error: 'Asset already exist'})
     }else {
-        await Asset.create(asset)
+        await Asset.update(asset, {where: {id: assetId}})
         res.json(asset)
     }
-    
-        const condition = {
-            where: {id : assetId}
-        }
 
-        await Asset.update(asset, condition)
-        res.json(asset)
 }
 
 const deleteAsset = async (req,res) => {
     const assetId = req.params.assetId
     Asset.destroy({
         where: { id: assetId },
-        actor: req.session.admin
+        actor: req.session?.admin
     })
     res.json("Deleted")
 }

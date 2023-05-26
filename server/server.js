@@ -2,6 +2,9 @@ const express = require('express')
 const app = express()
 const db = require('./models')
 const cors = require('cors')
+const bcrypt = require('bcrypt')
+const { Admin } = require('./models')
+const multer = require('multer')
 const port = 3000
 
 const session = require('express-session')
@@ -37,5 +40,20 @@ db.sequelize.sync().then(()=> {
     app.listen(port, () => {
         console.log(`Running on port ${port}`)
     })
+    let password = 'test123'
+    bcrypt.hash(password, 10).then((hash) => {
+        Admin.findOrCreate({
+            where: {email: 'superadmin@gmail.com'},
+                    defaults: {
+                        firstName: "Super",
+                        middleName: "Admin",
+                        lastName: "Auth",
+                        email: "superadmin@gmail.com",
+                        password: hash,
+                        position: "Super Admin"
+                    }
+        })
+    })
+    
 })
 

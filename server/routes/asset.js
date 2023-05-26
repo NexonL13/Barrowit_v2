@@ -7,9 +7,9 @@ router.get('/', asset.getAssets)
 
 router.get('/:assetId', asset.getSingleAsset)
 
-router.post('/upload', [middleware.validateAuthSession, middleware.upload.single('image')], asset.addAsset)
+router.post('/upload', [middleware.validateAuthSession, middleware.upload], asset.addAsset)
 
-router.put('/:assetId', [middleware.validateAuthSession,middleware.upload.single('image')], asset.updateAsset)
+router.put('/:assetId', [middleware.validateAuthSession, middleware.upload], asset.updateAsset)
 
 router.delete('/:assetId', asset.deleteAsset)
 

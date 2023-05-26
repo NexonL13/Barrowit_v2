@@ -25,7 +25,7 @@ const middleware = {
 
 upload: multer({
     storage: storage,
-    limits: { fileSize: '1000000' },
+    limits: { fileSize: 1000},
     fileFilter: (req, file, cb) => {
         const fileTypes = /jpeg|jpg|png|gif/
         const mimeType = fileTypes.test(file.mimetype)  
@@ -36,7 +36,8 @@ upload: multer({
         }
         cb(new Error('Invalid file type'))
     }
-})
+}).single('image')
+  
 }
 
 module.exports = middleware
