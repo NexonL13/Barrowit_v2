@@ -60,14 +60,14 @@ const updateAsset = async (req,res) => {
     //   })
     
 
-    const existAsset = await Asset.findOne({where: {name: asset.name}})
-    if(existAsset) {
-        await Asset.update(asset, {where: {id: assetId}})
-        res.json({error: 'Asset already exist'})
-    }else {
+    // const existAsset = await Asset.findOne({where: {name: asset.name}})
+    // if(existAsset) {
+    //     await Asset.update(asset, {where: {id: assetId}})
+    //     res.json({error: 'Asset already exist'})
+    // }else {
         await Asset.update(asset, {where: {id: assetId}})
         res.json(asset)
-    }
+    // }
 
 }
 
