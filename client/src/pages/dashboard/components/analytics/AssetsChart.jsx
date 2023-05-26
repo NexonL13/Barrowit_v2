@@ -3,30 +3,35 @@ import { Card, Title, LineChart } from "@tremor/react"
 
 const chartdata = [
   {
-      year: 2022,
-      'Borrowed Growth Rate': 2.04,
-      'Returned Growth Rate': 1.53,
+      year: 'Monday',
+      'Borrowed Growth Rate': 15.4,
+      'Returned Growth Rate': 2.67,
   },
   {
-      year: 2023,
-      'Borrowed Growth Rate': 1.96,
-      'Returned Growth Rate': 1.58,
+      year: 'Tuesday',
+      'Borrowed Growth Rate': 30.6,
+      'Returned Growth Rate': 16.7,
   },
   {
-      year: 2024,
+      year: 'Wednesday',
       'Borrowed Growth Rate': 1.96,
       'Returned Growth Rate': 1.61,
   },
   {
-      year: 2025,
-      'Borrowed Growth Rate': 1.93,
-      'Returned Growth Rate': 1.61,
+      year: 'Thursday',
+      'Borrowed Growth Rate': 60.7,
+      'Returned Growth Rate': 30.6,
   },
   {
-      year: 2026,
+      year: 'Friday',
       'Borrowed Growth Rate': 1.88,
       'Returned Growth Rate': 1.67,
   },
+  {
+    year: 'Saturday',
+    'Borrowed Growth Rate': 75.8,
+    'Returned Growth Rate': 50.6,
+},
     //...
 ]
 
