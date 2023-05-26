@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { RxDashboard } from "react-icons/rx"
-import { FiPackage, FiUsers} from "react-icons/fi"
+import { FiPackage, FiUsers } from "react-icons/fi"
 import { AiOutlineCalendar, AiOutlineAudit } from "react-icons/ai"
 import { MdOutlineApproval, MdOutlineDocumentScanner } from "react-icons/md"
+import { RiAdminLine } from 'react-icons/ri'
 
 const Sidebar = (props) => {
   const navigate = useNavigate()
@@ -12,7 +13,8 @@ const Sidebar = (props) => {
     {section: "Dashboard", link:"", icon: <RxDashboard/>},
     {section: "Assets", link:"assets", icon:<FiPackage/>},
     {section: "Calendar", link:"calendar", icon:<AiOutlineCalendar/>},
-    {section: "Users Account", link:"users", icon:<FiUsers/>},
+    {section: "Admin Account", link:"users", icon:<RiAdminLine/>, access: superAccess},
+    {section: "User Account", link:"client", icon:<FiUsers/>, access: superAccess},
     {section: "Approval", link:"approval", icon:<MdOutlineApproval/>},
     {section: "Request Documents", link:"document", icon:<MdOutlineDocumentScanner/>},
     {section: "Audit Trails", link: "trail", icon: <AiOutlineAudit/>, access: superAccess },

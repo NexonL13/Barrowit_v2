@@ -6,6 +6,27 @@ const getAdmins = async (req, res) => {
     res.json(listOfAdmins)
 }
 
+const getOneAdmin = async (req, res) => {
+    const adminId = req.params.id
+    const admin = await Admin.findOne({where: {id: adminId}})
+    res.json(admin)
+}
+
+const updateAdmin = async (req, res) => {
+    const adminId = req.params.id
+    const admin = req.body
+    await Admin.update(admin, {where: {id: adminId}})
+    res.json(admin)
+}
+
+const deleteAdmin = async (req,res) => {
+    const adminId = req.params.id
+    Admin.destroy({
+        where: { id: adminId }
+    })
+    res.json("Deleted")
+}
+
 const registerAdmin = async (req, res) => {
     const { firstName, middleName, lastName, email, password, position} = req.body
 
@@ -59,4 +80,4 @@ const logoutAdmin = (req, res) => {
 }
 
 
-module.exports = { registerAdmin, loginAdmin, isLoggedIn, logoutAdmin, getAdmins }
+module.exports = { registerAdmin, loginAdmin, isLoggedIn, logoutAdmin, getAdmins, getOneAdmin, updateAdmin, deleteAdmin }

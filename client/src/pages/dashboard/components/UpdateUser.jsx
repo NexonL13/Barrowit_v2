@@ -1,15 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {Formik, Form} from 'formik'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import * as Yup from 'yup'
 import axios from 'axios'
 import FormikControl from '../../forms/formik/FormikControl'
 import WarningError from '../../forms/formik/components/WarningError'
-import { AiOutlineRollback } from 'react-icons/ai'
+import { AiOutlineRollback, AiOutlineEdit, AiOutlineUserDelete } from 'react-icons/ai'
+import DeleteModal from './listOfAdmins/DeleteModal'
 
-const AddUser = () => {
+const UpdateUser = () => {
   const navigate = useNavigate()
   const [exist,setExist] = useState(false)
+  const [admin, setAdmin] = useState()
+  const params = useParams()
+
+  const fetchAdmin = async () => {
+    const { data } = await axios.get(`http://localhost:3000/auth/admin/${params.id}`)
+    setAdmin(data)
+  }
+
+  useEffect(() => {
+      fetchAdmin()
+    }, [])
 
   const dropdownOptions = [
     {key:"Chairman", value: "Chairman"},
@@ -24,8 +36,6 @@ const AddUser = () => {
     middleName: "",
     lastName: "",
     email: "",
-    password: "",
-    confirm_password: "",
     position: ""
   }
   const validationSchema = Yup.object({
@@ -33,12 +43,10 @@ const AddUser = () => {
     middleName: Yup.string().min(2, "Must be at least 2 characters").nullable(true),
     lastName: Yup.string().required('Last Name is a required field'),
     email: Yup.string().email('Must be a valid email').required('Email is a required field'),
-    password: Yup.string().min(6, 'Must be at least 6 characters').max(20, 'Must be at most 20 characters').required('Password is a required field'),
-    confirm_password: Yup.mixed().oneOf([Yup.ref('password'), null], 'Must match a password').required('Confirm password is a required field'),
     position: Yup.string().required("Position is a required field").notOneOf([""], "Select a valid position")
   })
   const onSubmit = async (values) => {
-    await axios.post("http://localhost:3000/auth/register", values).then((res)=> {
+    await axios.put(`http://localhost:3000/auth/admin/${params.id}`, values).then((res)=> {
       if(res.data.error) {
         setExist(true)
       }
@@ -46,9 +54,15 @@ const AddUser = () => {
     })
   };
 
+  const deleteAdmin = async () => {
+    await axios.delete(`http://localhost:3000/auth/admin/${params.id}`).then(()=> {
+      navigate('/dashboard/users')
+    })
+  }
+
 
   return (
-    <section>
+  <section>
   <div className="lg:grid lg:min-h-screen lg:grid-cols-24">
     <main
       aria-label="Main"
@@ -56,15 +70,16 @@ const AddUser = () => {
     >
       <div className="max-w-xl lg:max-w-3xl">
       <div className='flex'>
-      <h1 className="text-xl font-light">Add Admin</h1>
-      <button onClick={() => navigate(-1)} className='ms-auto'><AiOutlineRollback className="text-green-400 text-3xl"/></button>
+      <h1 className="text-xl font-light">Update Admin</h1>
+      <button onClick={() => navigate(-1)} className='ms-auto'><AiOutlineRollback className="text-blue-400 text-3xl"/></button>
       </div>
         <Formik
-         initialValues={initialValues}
+         initialValues={admin ?? initialValues}
          validationSchema={validationSchema}
          onSubmit={onSubmit}
          validateOnBlur={false}
          validateOnChange={false}
+         enableReinitialize={true}
         >
         <Form className="mt-8 grid grid-cols-6 gap-6">
         <div className={`${
@@ -111,23 +126,6 @@ const AddUser = () => {
               />
           </div>
 
-          <div className="col-span-6 sm:col-span-3">
-          <FormikControl
-                control="input"
-                type="password"
-                label="Password"
-                name="password"
-              />
-          </div>
-
-          <div className="col-span-6 sm:col-span-3">
-          <FormikControl
-                control="input"
-                type="password"
-                label="Confirm Password"
-                name="confirm_password"
-              />
-          </div>
           <div className="col-span-6">
           <FormikControl
             control="select"
@@ -138,21 +136,30 @@ const AddUser = () => {
           />
           </div>
 
-          <div className="col-span-6 sm:flex sm:items-center sm:gap-4 sm:px-auto ">
+          <div className="col-span-6 sm:flex sm:items-center sm:gap-4 sm:px-auto flex justify-normal">
             <button
               type="submit"
-              className="inline-block shrink-0 rounded-md border border-green-400 bg-green-400 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-green-400 focus:outline-none focus:ring active:text-green-500"
+              className="inline-flex shrink-0 rounded-md border border-blue-400 bg-blue-400 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-400 focus:outline-none focus:ring active:text-blue-500 items-center"
               >
-              Create an account
+              <AiOutlineEdit className='text-lg'/>
+              <span>Update</span>
             </button>
+            <label htmlFor='delete-admin'
+              type="submit"
+              className="inline-flex shrink-0 rounded-md border border-red-400 bg-red-400 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-red-400 focus:outline-none focus:ring active:text-red-500"
+              >
+              <AiOutlineUserDelete className='text-lg'/>
+              Delete
+            </label>
           </div>
         </Form>
         </Formik>
       </div>
     </main>
   </div>
+  <DeleteModal admin={admin}/>
 </section>
   )
 }
 
-export default AddUser
+export default UpdateUser

@@ -86,7 +86,7 @@ const deleteAsset = async (req,res) => {
 
 Asset.afterCreate(async (asset) => {
     const admin = await Admin.findOne({where: {id: asset.adminId}})
-    const actor = admin.dataValues
+    const actor = admin?.dataValues
     await Audit.create({
         recordId: asset.id,
         actor: `${actor.firstName} ${actor.middleName} ${actor.lastName}`,
@@ -97,7 +97,7 @@ Asset.afterCreate(async (asset) => {
 
 Asset.afterBulkUpdate(async (asset) => {
     const admin = await Admin.findOne({where: {id: asset.attributes.adminId}})
-    const actor = admin.dataValues
+    const actor = admin?.dataValues
     await Audit.create({
         recordId: asset.where.id,
         actor: `${actor.firstName} ${actor.middleName} ${actor.lastName}`,
@@ -108,7 +108,7 @@ Asset.afterBulkUpdate(async (asset) => {
 
 Asset.beforeBulkDestroy(async (asset) => {
     const deleted = await Asset.findOne({where: {id: asset.where.id}})
-    const deletedAsset = deleted.dataValues
+    const deletedAsset = deleted?.dataValues
     const { actor } = asset
     await Audit.create({
         recordId: asset.where.id,

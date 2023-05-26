@@ -1,7 +1,7 @@
 const { Audit } = require('../models')
 
 const getAudits = async (req,res) => {
-    const listOfAudit = await Audit.findAll({ order:[['createdAt', 'DESC']] })
+    const listOfAudit = await Audit.findAll()
     res.json(listOfAudit)
 }
 
