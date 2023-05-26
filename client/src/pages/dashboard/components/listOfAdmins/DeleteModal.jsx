@@ -24,7 +24,7 @@ const DeleteModal = ({admin}) => {
           <p>{`Email: ${admin?.firstName}`}</p>
           <p>{`Role: ${admin?.position}`}</p>
           <div className="modal-action">
-            <label htmlFor="delete-admin" className="btn" onClick={() => deleteHandler(admin.id)}>
+            <label htmlFor="delete-admin" className="btn" onClick={() => deleteHandler(admin?.id)}>
               Confirm
             </label>
             <label htmlFor="delete-admin" className="btn">

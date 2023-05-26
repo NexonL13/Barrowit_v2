@@ -18,11 +18,11 @@ const DeleteModal = ({ listOfAssets, setListOfAssets, asset}) => {
             Are you sure?
           </h3>
           <p className="py-4">
-            {`Do you really want to delete this ${asset.name} asset? 
+            {`Do you really want to delete this ${asset?.name} asset? 
             This process cannot be undone.`}
           </p>
           <div className="modal-action">
-            <label htmlFor="delete-modal" className="btn" onClick={() => deleteHandler(asset.id)}>
+            <label htmlFor="delete-modal" className="btn" onClick={() => deleteHandler(asset?.id)}>
               Confirm
             </label>
             <label htmlFor="delete-modal" className="btn">
