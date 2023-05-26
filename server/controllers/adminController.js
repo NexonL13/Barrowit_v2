@@ -53,11 +53,9 @@ const loginAdmin = async (req,res) => {
 }
 
 const logoutAdmin = (req, res) => {
-    if(req.session.admin && req.cookies.admin_id) {
         res.clearCookie('admin_id') 
         res.json({loggedIn: false})
-        return res.end()
-    }
+        res.end()
 }
 
 

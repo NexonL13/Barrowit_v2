@@ -8,6 +8,7 @@ const TableAsset = () => {
   const navigate = useNavigate();
   const [listOfAssets, setListOfAssets] = useState([]);
   const [asset,setAsset] = useState({});
+  const [search, setSearch] = useState("");
 
   const fetchAssets = async () => {
     const res = await axios.get("http://localhost:3000/asset");
@@ -16,7 +17,8 @@ const TableAsset = () => {
 
   useEffect(() => {
     fetchAssets();
-  }, []);
+  }, [])
+
   return (
     <div className="overflow-x-auto w-full px-5">
       <div>
@@ -69,6 +71,7 @@ const TableAsset = () => {
           <input
             placeholder="Search"
             className="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
         <div className="block relative ms-auto my-auto">
@@ -96,7 +99,10 @@ const TableAsset = () => {
           </tr>
         </thead>
         <tbody>
-          {listOfAssets.map((asset) => (
+          {listOfAssets.filter((item) => {
+            return search.toLowerCase() === ""
+            ? item : item.name.toLowerCase().includes(search)
+          }).map((asset) => (
             <AssetRow asset={asset} key={asset.id} setAsset={setAsset}/>
           ))}
         </tbody>

@@ -6,8 +6,8 @@ import logo from "/src/logo.png"
 const Header = (props) => {
   const navigate = useNavigate()
 
-  const logOut = () => {
-    axios.get("http://localhost:3000/auth/logout", {withCredentials: true}).then(() => {
+  const logOut = async () => {
+    await axios.get("http://localhost:3000/auth/logout", {withCredentials: true}).then(() => {
       navigate('/')
     })
   }
