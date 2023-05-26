@@ -4,9 +4,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import axios from "axios";
 import FormikControl from "../../forms/formik/FormikControl";
-import WarningError from "../../forms/formik/components/WarningError";
 import TextError from "../../forms/formik/components/TextError";
 import { AiOutlineRollback } from "react-icons/ai"
+import WarningError from "../../forms/formik/components/WarningError";
 
 
 const UpdateAsset = () => {
@@ -44,21 +44,8 @@ const UpdateAsset = () => {
     sponsor: "",
   };
   
-  const MAX_FILE_SIZE = 10 * 1024 * 1024; //10MB
-  const validFileExtensions = { image: ['jpg', 'gif', 'png', 'jpeg', 'svg', 'webp'] };
-
-  function isValidFileType(fileName, fileType) {
-  return validFileExtensions[fileType].indexOf(fileName.split('.').pop()) > -1;
-  }
-
   const validationSchema = Yup.object({
-    image: Yup
-    .mixed()
-    .required("Image is required")
-    .test("is-valid-type", "Not a valid image type",
-      value => isValidFileType(value.name,"image"))
-      .test("is-valid-size", "Max allowed size is 10MB",
-            value => value && value.size <= MAX_FILE_SIZE),
+    image: Yup.mixed().required("Image is a required field"),
     name: Yup.string().required("Asset Name is a required field"),
     description: Yup.string()
       .min(6, "Must be at least 6 characters")
