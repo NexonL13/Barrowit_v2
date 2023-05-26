@@ -44,7 +44,7 @@ const UpdateAsset = () => {
     sponsor: "",
   };
   
-  const MAX_FILE_SIZE = 102400; //100KB
+  const MAX_FILE_SIZE = 10 * 1024 * 1024; //10MB
   const validFileExtensions = { image: ['jpg', 'gif', 'png', 'jpeg', 'svg', 'webp'] };
 
   function isValidFileType(fileName, fileType) {
@@ -57,7 +57,7 @@ const UpdateAsset = () => {
     .required("Image is required")
     .test("is-valid-type", "Not a valid image type",
       value => isValidFileType(value.name,"image"))
-      .test("is-valid-size", "Max allowed size is 100KB",
+      .test("is-valid-size", "Max allowed size is 10MB",
             value => value && value.size <= MAX_FILE_SIZE),
     name: Yup.string().required("Asset Name is a required field"),
     description: Yup.string()
